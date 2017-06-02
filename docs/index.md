@@ -61,6 +61,7 @@
   - [preparePaymentChannelClaim](#preparepaymentchannelclaim)
   - [preparePaymentChannelFund](#preparepaymentchannelfund)
   - [sign](#sign)
+  - [signWithKeypair](#signwithkeypair)
   - [combine](#combine)
   - [submit](#submit)
   - [generateAddress](#generateaddress)
@@ -3610,6 +3611,47 @@ id | [id](#transaction-id) | The [Transaction ID](#transaction-id) of the signed
 const txJSON = '{"Flags":2147483648,"TransactionType":"AccountSet","Account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59","Domain":"726970706C652E636F6D","LastLedgerSequence":8820051,"Fee":"12","Sequence":23}';
 const secret = 'shsWGZcmZz6YsWWmcnpfr6fLTdtFV';
 return api.sign(txJSON, secret);
+```
+
+
+```json
+{
+  "signedTransaction": "12000322800000002400000017201B0086955368400000000000000C732102F89EAEC7667B30F33D0687BBA86C3FE2A08CCA40A9186C5BDE2DAA6FA97A37D874473045022100BDE09A1F6670403F341C21A77CF35BA47E45CDE974096E1AA5FC39811D8269E702203D60291B9A27F1DCABA9CF5DED307B4F23223E0B6F156991DB601DFB9C41CE1C770A726970706C652E636F6D81145E7B112523F68D2F5E879DB4EAC51C6698A69304",
+  "id": "02ACE87F1996E3A23690A5BB7F1774BF71CCBA68F79805831B42ABAD5913D6F4"
+}
+```
+
+
+## signWithKeypair
+
+`signWithKeypair(txJSON: string, keypair: Object, options: Object): {signedTransaction: string, id: string}`
+
+Sign a prepared transaction. The signed transaction must subsequently be [submitted](#submit).
+
+### Parameters
+
+Name | Type | Description
+---- | ---- | -----------
+txJSON | string | Transaction represented as a JSON string in rippled format.
+keypair | keypair string | The private and public key of the account that is initiating the transaction.
+options | object | *Optional* Options that control the type of signature that will be generated.
+*options.* signAs | [address](#ripple-address) | *Optional* The account that the signature should count for in multisigning.
+
+### Return Value
+
+This method returns an object with the following structure:
+
+Name | Type | Description
+---- | ---- | -----------
+signedTransaction | string | The signed transaction represented as an uppercase hexadecimal string.
+id | [id](#transaction-id) | The [Transaction ID](#transaction-id) of the signed transaction.
+
+### Example
+
+```javascript
+const txJSON = '{"Flags":2147483648,"TransactionType":"AccountSet","Account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59","Domain":"726970706C652E636F6D","LastLedgerSequence":8820051,"Fee":"12","Sequence":23}';
+const keypair = { privateKey: '00ACCD3309DB14D1A4FC9B1DAE608031F4408C85C73EE05E035B7DC8B25840107A', publicKey: '02F89EAEC7667B30F33D0687BBA86C3FE2A08CCA40A9186C5BDE2DAA6FA97A37D8' };
+return api.signWithKeypair(txJSON, keypair);
 ```
 
 
