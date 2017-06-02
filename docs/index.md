@@ -3634,8 +3634,8 @@ Name | Type | Description
 ---- | ---- | -----------
 txJSON | string | Transaction represented as a JSON string in rippled format.
 keypair | object | The private and public key of the account that is initiating the transaction.
-*keypair.* privateKey | string | *Optional* The uppercase hexadecimal representation of the secp256k1 private key of the account that is initiating the transaction.
-*keypair.* publicKey | string | *Optional* The uppercase hexadecimal representation of the secp256k1 public key of the account that is initiating the transaction.
+*keypair.* privateKey | string | The uppercase hexadecimal representation of the secp256k1 private key of the account that is initiating the transaction.
+*keypair.* publicKey | string | The uppercase hexadecimal representation of the secp256k1 public key of the account that is initiating the transaction.
 options | object | *Optional* Options that control the type of signature that will be generated.
 *options.* signAs | [address](#ripple-address) | *Optional* The account that the signature should count for in multisigning.
 
