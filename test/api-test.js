@@ -439,16 +439,16 @@ describe('RippleAPI', function() {
   });
 
   it('signWithKeypair', function() {
-      const keypair = { privateKey: '001ACAAEDECE405B2A958212629E16F2EB46B153EEE94CDD350FDEFF52795525B7',
-                       publicKey: '0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020' };
+      const keypair = { privateKey: '00ACCD3309DB14D1A4FC9B1DAE608031F4408C85C73EE05E035B7DC8B25840107A',
+                        publicKey: '02F89EAEC7667B30F33D0687BBA86C3FE2A08CCA40A9186C5BDE2DAA6FA97A37D8' };
       const result = this.api.signWithKeypair(requests.sign.normal.txJSON, keypair);
       assert.deepEqual(result, responses.sign.normal);
       schemaValidator.schemaValidate('sign', result);
     });
 
   it('signWithKeypair - already signed', function() {
-    const keypair = { privateKey: '001ACAAEDECE405B2A958212629E16F2EB46B153EEE94CDD350FDEFF52795525B7',
-                     publicKey: '0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020' };
+    const keypair = { privateKey: '00ACCD3309DB14D1A4FC9B1DAE608031F4408C85C73EE05E035B7DC8B25840107A',
+                      publicKey: '02F89EAEC7667B30F33D0687BBA86C3FE2A08CCA40A9186C5BDE2DAA6FA97A37D8' };
     const result = this.api.signWithKeypair(requests.sign.normal.txJSON, keypair);
     assert.throws(() => {
       const tx = JSON.stringify(binary.decode(result.signedTransaction));
