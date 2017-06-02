@@ -12,7 +12,7 @@ Sign a prepared transaction. The signed transaction must subsequently be [submit
 
 This method returns an object with the following structure:
 
-<%- renderSchema("output/signWithKeypair.json") %>
+<%- renderSchema("output/sign.json") %>
 
 ### Example
 
@@ -22,4 +22,4 @@ const keypair = { privateKey: '00ACCD3309DB14D1A4FC9B1DAE608031F4408C85C73EE05E0
 return api.signWithKeypair(txJSON, keypair);
 ```
 
-<%- renderFixture("responses/signWithKeypair.json") %>
+<%- renderFixture("responses/sign.json") %>

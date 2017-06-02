@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "keypair",
+  "description": "The secp256k1 private and public key of an account.",
+  "type": "object",
+  "properties": {
+    "privateKey": {
+      "type": "string",
+      "description": "The uppercase hexadecimal representation of a secp256k1 private key."
+    },
+    "publicKey": {
+      "type": "string",
+      "description": "The uppercase hexadecimal representation of a secp256k1 public key."
+    }
+  }
+}
+
