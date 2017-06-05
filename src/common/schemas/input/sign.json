@@ -25,7 +25,6 @@
         }
       },
       "description": "The private and public key of the account that is initiating the transaction.",
-      "additionalProperties": false,
       "required": ["privateKey", "publicKey"]
     },
     "options": {
