@@ -7,10 +7,26 @@
       "type": "string",
       "description": "Transaction represented as a JSON string in rippled format."
     },
+    "keypair": {
+      "type": "object",
+      "properties": {
+        "privateKey": {
+          "type": "string",
+          "description": "The uppercase hexadecimal representation of the secp256k1 or Ed25519 private key of the account that is initiating the transaction."
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "The uppercase hexadecimal representation of the secp256k1 or Ed25519 public key of the account that is initiating the transaction."
+        }
+      },
+      "description": "The private and public key of the account that is initiating the transaction.",
+      "additionalProperties": false,
+      "required": ["privateKey", "publicKey"]
+    },
     "secret": {
       "type": "string",
       "format": "secret",
-      "description": "The secret of the account that is initiating the transaction."
+      "description": "The secret of the account that is initiating the transaction.(This field is exclusive with keypair)."
     },
     "options": {
       "type": "object",
@@ -25,5 +41,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["txJSON", "secret"]
+  "required": ["txJSON"]
 }

@@ -12,21 +12,20 @@ function computeSignature(tx: Object, privateKey: string, signAs: ?string) {
   return keypairs.sign(signingData, privateKey)
 }
 
-function sign(txJSON: string, secret: string, options: Object = {}
+function sign(txJSON: string, keypair, options?: Object = {}
 ): {signedTransaction: string; id: string} {
-  validate.sign({txJSON, secret})
-  // we can't validate that the secret matches the account because
-  // the secret could correspond to the regular key
-
+  if(typeof(keypair) === 'string') {
+      validate.sign({txJSON, keypair})
+      // we can't validate that the secret matches the account because
+      // the secret could correspond to the regular key
+      keypair = keypairs.deriveKeypair(keypair)
+  }
   const tx = JSON.parse(txJSON)
   if (tx.TxnSignature || tx.Signers) {
     throw new utils.common.errors.ValidationError(
       'txJSON must not contain "TxnSignature" or "Signers" properties')
   }
-
-  const keypair = keypairs.deriveKeypair(secret)
   tx.SigningPubKey = options.signAs ? '' : keypair.publicKey
-
   if (options.signAs) {
     const signer = {
       Account: options.signAs,
