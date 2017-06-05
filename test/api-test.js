@@ -452,7 +452,7 @@ describe('RippleAPI', function() {
     const result = this.api.sign(requests.sign.normal.txJSON, keypair);
     assert.throws(() => {
       const tx = JSON.stringify(binary.decode(result.signedTransaction));
-      this.api.signWithKeypair(tx, keypair);
+      this.api.sign(tx, keypair);
     }, /txJSON must not contain "TxnSignature" or "Signers" properties/);
   });
 
@@ -858,6 +858,7 @@ describe('RippleAPI', function() {
         _.partial(checkResult,
           responses.getTransaction.paymentChannelClaim,
           'getTransaction'));
+     });
 
     it('getTransaction - no Meta', function() {
       const hash =
@@ -1597,14 +1598,14 @@ describe('RippleAPI - offline', function() {
     const secret = 'shsWGZcmZz6YsWWmcnpfr6fLTdtFV';
     const settings = requests.prepareSettings.domain;
     const instructions = {
-      sequence: 23,
-      maxLedgerVersion: 8820051,
-      fee: '0.000012'
+    sequence: 23,
+    maxLedgerVersion: 8820051,
+    fee: '0.000012'
     };
     return api.prepareSettings(address, settings, instructions).then(data => {
-      checkResult(responses.prepareSettings.flags, 'prepare', data);
-      assert.deepEqual(api.sign(data.txJSON, secret),
-        responses.prepareSettings.signed);
+    checkResult(responses.prepareSettings.flags, 'prepare', data);
+    assert.deepEqual(api.sign(data.txJSON, secret),
+      responses.prepareSettings.signed);
     });
   });
 
