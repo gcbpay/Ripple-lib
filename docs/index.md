@@ -3594,12 +3594,12 @@ Sign a prepared transaction. The signed transaction must subsequently be [submit
 Name | Type | Description
 ---- | ---- | -----------
 txJSON | string | Transaction represented as a JSON string in rippled format.
-keypair | object | *Optional* The private and public key of the account that is initiating the transaction.(This field is exclusive with keypair).
-*keypair.* privateKey | string | The uppercase hexadecimal representation of the secp256k1 or Ed25519 private key of the account that is initiating the transaction.
-*keypair.* publicKey | string | The uppercase hexadecimal representation of the secp256k1 or Ed25519 public key of the account that is initiating the transaction.
+keypair | object | *Optional* The private and public key of the account that is initiating the transaction. (This field is exclusive with secret).
+*keypair.* privateKey | privateKey | The uppercase hexadecimal representation of the secp256k1 or Ed25519 private key.
+*keypair.* publicKey | publicKey | The uppercase hexadecimal representation of the secp256k1 or Ed25519 public key.
 options | object | *Optional* Options that control the type of signature that will be generated.
 *options.* signAs | [address](#ripple-address) | *Optional* The account that the signature should count for in multisigning.
-secret | secret string | *Optional* The secret of the account that is initiating the transaction.(This field is exclusive with keypair).
+secret | secret string | *Optional* The secret of the account that is initiating the transaction. (This field is exclusive with keypair).
 
 ### Return Value
 
