@@ -12,17 +12,9 @@ function computeSignature(tx: Object, privateKey: string, signAs: ?string) {
   return keypairs.sign(signingData, privateKey)
 }
 
-function sign(txJSON: string, keypair, options?: Object = {}
+function signWithKeypair(txJSON: string, keypair: Object, options: Object = {}
 ): {signedTransaction: string; id: string} {
-  if(typeof(keypair) === 'string') {
-    // we can't validate that the secret matches the account because
-    // the secret could correspond to the regular key
-    const secret = keypair
-    validate.sign({txJSON, secret})
-    keypair = keypairs.deriveKeypair(secret)
-  } else {
-    validate.sign({txJSON, keypair})
-  }
+  validate.sign({txJSON, keypair})
 
   const tx = JSON.parse(txJSON)
   if (tx.TxnSignature || tx.Signers) {
@@ -50,4 +42,17 @@ function sign(txJSON: string, keypair, options?: Object = {}
   }
 }
 
+function sign(txJSON: string, secret?: any, options?: Object, keypair?: Object
+): {signedTransaction: string; id: string} {
+  if(typeof(secret) === 'string') {
+    // we can't validate that the secret matches the account because
+    // the secret could correspond to the regular key
+    validate.sign({txJSON, secret})
+    return signWithKeypair (txJSON, keypairs.deriveKeypair(secret), options)
+  } else {
+    return signWithKeypair (txJSON, keypair ? keypair : secret, options)
+  }
+}
+
 module.exports = sign
+
