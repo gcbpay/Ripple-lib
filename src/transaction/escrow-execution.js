@@ -6,6 +6,8 @@ const validate = utils.common.validate
 import type {Instructions, Prepare} from './types.js'
 import type {Memo} from '../common/types.js'
 
+var ValidationError = utils.common.errors.ValidationError;
+
 type EscrowExecution = {
   owner: string,
   escrowSequence: number,
