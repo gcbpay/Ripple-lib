@@ -3,17 +3,14 @@
 const common = require('../common')
 const keypairs = require('ripple-keypairs')
 const binary = require('ripple-binary-codec')
-const {validate} = common
+const {validate, stringToUtf8ByteArray, bytesToHex} = common
 
 function verifyMessage(message: string,
   signature: string, publicKey: string
 ): string {
   validate.verifyMessage({message, signature, publicKey})
 
-  const signingData = binary.encode({
-    message: message
-  })
-  return keypairs.verify(signingData, signature, publicKey)
+  return keypairs.verify(bytesToHex(stringToUtf8ByteArray(message)), signature, publicKey)
 }
 
 module.exports = verifyMessage
